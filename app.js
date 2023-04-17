@@ -4,12 +4,13 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+const routes = require('./routes');
 const { globalErrorHandler } = require('./utils/error');
 
 const app = express();
 
 mongoose
-  .connect('mongodb://localhost:27017/mydatabase', {
+  .connect('mongodb://localhost:27017/codeChameleon', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -18,12 +19,8 @@ mongoose
 
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
+app.use(cors());
+app.use(routes);
 
 app.get('/ping', (req, res) => {
   res.status(200).json({ message: 'pong' });
