@@ -1,0 +1,33 @@
+{
+  "name": "noname_be",
+  "description": "장주성, 김은경",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Floor-8/noname_BE.git"
+  },
+  "author": "floor8",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Floor-8/noname_BE/issues"
+  },
+  "homepage": "https://github.com/Floor-8/noname_BE#readme",
+  "dependencies": {
+    "axios": "^1.3.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3",
+    "morgan": "^1.10.0",
+    "openai": "^3.2.1"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3"
+  }
+}
