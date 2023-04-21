@@ -1,6 +1,7 @@
 const { OAuth2Client } = require('google-auth-library');
 
 const userDao = require('../models/userDao');
+const { createAccessToken } = require('../utils/createToken');
 
 const login = async (clientId, credential) => {
   const client = new OAuth2Client(clientId);
@@ -24,11 +25,16 @@ const login = async (clientId, credential) => {
   //accessToken
   const [userInfo] = await userDao.getUserInfo(id);
 
+  const userMongoId = userInfo._id.toString();
+  const accessToken = await createAccessToken(userMongoId);
+
   console.log(userInfo.email);
   console.log(userInfo.googleId);
   console.log('userInfo : ', userInfo);
+  console.log(userInfo._id);
+  console.log(userInfo._id.toString());
 
-  return payload;
+  return accessToken;
 };
 
 module.exports = { login };

@@ -6,7 +6,7 @@ const login = catchAsync(async (req, res) => {
 
   const result = await userService.login(clientId, credential);
 
-  res.status(200).json({ result: result });
+  res.status(200).json({ accessToken: result });
 });
 
 module.exports = { login };
