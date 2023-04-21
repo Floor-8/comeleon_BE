@@ -19,7 +19,14 @@ mongoose
 
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(cors());
+
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
+
 app.use(routes);
 
 app.get('/ping', (req, res) => {
@@ -29,6 +36,7 @@ app.get('/ping', (req, res) => {
 app.all('*', (req, res, next) => {
   const err = new Error(`Can't find ${req.originalUrl} on this server!`);
   err.statusCode = 404;
+  console.error(err.stack);
   next(err);
 });
 
