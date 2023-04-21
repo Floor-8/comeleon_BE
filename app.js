@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+const routes = require('./routes');
 const { globalErrorHandler } = require('./utils/error');
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(routes);
 
 app.get('/ping', (req, res) => {
   res.status(200).json({ message: 'pong' });
@@ -32,6 +34,7 @@ app.get('/ping', (req, res) => {
 app.all('*', (req, res, next) => {
   const err = new Error(`Can't find ${req.originalUrl} on this server!`);
   err.statusCode = 404;
+  console.error(err.stack);
   next(err);
 });
 
