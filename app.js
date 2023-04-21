@@ -10,7 +10,7 @@ const { globalErrorHandler } = require('./utils/error');
 const app = express();
 
 mongoose
-  .connect('mongodb://localhost:27017/codeChameleon', {
+  .connect('mongodb://localhost:27017/mydatabase', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

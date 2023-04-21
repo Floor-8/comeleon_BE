@@ -1,6 +1,8 @@
 const { Configuration, OpenAIApi } = require('openai');
 
-const getPrompts = async (inputText, isComment, ol, cl) => {
+const openaiDao = require('../models/openaiDao');
+
+const getPrompts = async (userMongoId, inputText, isComment, ol, cl) => {
   const configuration = new Configuration({
     organization: process.env.OPENAI_ORGANIZATION_KEY,
     apiKey: process.env.OPENAI_API_KEY,
@@ -8,7 +10,6 @@ const getPrompts = async (inputText, isComment, ol, cl) => {
   const openai = new OpenAIApi(configuration);
 
   const runPrompt = async (inputText, isComment, ol, cl) => {
-    console.log('트루냐 폴스냐', isComment);
     const language = Object.freeze({
       js: 'javascript',
       py: 'python',
@@ -48,6 +49,10 @@ const getPrompts = async (inputText, isComment, ol, cl) => {
   };
 
   const response = await runPrompt(inputText, isComment, ol, cl);
+
+  const outputText = response.data.choices[0].text;
+  await openaiDao.createConverter(userMongoId, inputText, outputText, ol, cl);
+
   return response.data.choices[0].text;
 };
 
