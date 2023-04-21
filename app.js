@@ -10,7 +10,7 @@ const { globalErrorHandler } = require('./utils/error');
 const app = express();
 
 mongoose
-  .connect('mongodb://localhost:27017/mydatabase', {
+  .connect('mongodb://localhost:27017/codeChameleon', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -19,12 +19,14 @@ mongoose
 
 app.use(express.json());
 app.use(morgan('dev'));
+
 app.use(
   cors({
     origin: true,
     credentials: true,
   })
 );
+
 app.use(routes);
 
 app.get('/ping', (req, res) => {
