@@ -22,8 +22,11 @@ const getPrompts = async (userMongoId, inputText, isComment, ol, cl) => {
       
       And please add explanation or comments to the following code block.
 
-      This is the code block: 
+      This is the original code block: """
       ${inputText}
+      """
+
+      # please add comment here.
       `;
     } else {
       prompt = `please convert this ${language}.${ol} code block to ${language}.${cl} code blocks without adding any comment. 
