@@ -9,4 +9,11 @@ const login = catchAsync(async (req, res) => {
   res.status(200).json({ accessToken: result });
 });
 
-module.exports = { login };
+const getUserChats = catchAsync(async (req, res) => {
+  const userId = req.user;
+  const result = await userService.getUserChats(userId);
+
+  res.status(200).json({ data: result });
+});
+
+module.exports = { login, getUserChats };
