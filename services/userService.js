@@ -37,4 +37,8 @@ const login = async (clientId, credential) => {
   return accessToken;
 };
 
-module.exports = { login };
+const getUserChats = async (userId) => {
+  return await userDao.getUserChats(userId);
+};
+
+module.exports = { login, getUserChats };

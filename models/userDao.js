@@ -1,4 +1,5 @@
 const userSchema = require('../schemas/user');
+const converterSchema = require('../schemas/converter');
 
 const login = async (id, email, name) => {
   await userSchema.create({
@@ -12,4 +13,8 @@ const getUserInfo = async (id) => {
   return await userSchema.find({ googleId: id });
 };
 
-module.exports = { login, getUserInfo };
+const getUserChats = async (userId) => {
+  return await converterSchema.find({ converter: userId });
+};
+
+module.exports = { login, getUserInfo, getUserChats };
