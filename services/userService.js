@@ -22,20 +22,10 @@ const login = async (clientId, credential) => {
 
   const [userInfo] = await userDao.getUserInfo(id);
 
-  // console.log(userInfo.email);
-  // console.log(userInfo.googleId);
-  // console.log('userInfo : ', userInfo);
-  // console.log(userInfo._id);
-  // console.log(userInfo._id.toString());
-
   if (userInfo) {
-    console.log(userInfo);
-    console.log('1----------------');
-    console.log(userInfo._id.toString());
     const userMongoId = userInfo._id.toString();
     return await createAccessToken(userMongoId);
   } else {
-    console.log('열받네');
     await userDao.login(id, email, name);
     const [userInfo] = await userDao.getUserInfo(id);
     const userMongoId = userInfo._id.toString();
