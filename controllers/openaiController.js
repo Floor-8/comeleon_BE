@@ -5,6 +5,7 @@ const getPrompts = catchAsync(async (req, res) => {
   const { inputText } = req.body;
   const { isComment, ol, cl } = req.query;
   const userMongoId = req.user;
+
   // ol: original language, cl: converted language
 
   const response = await openaiService.getPrompts(
