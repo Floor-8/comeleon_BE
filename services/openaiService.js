@@ -53,9 +53,6 @@ const getPrompts = async (userMongoId, inputText, isComment, ol, cl) => {
 
   const response = await runPrompt(inputText, isComment, ol, cl);
 
-  const outputText = response.data.choices[0].text;
-  await openaiDao.createConverter(userMongoId, inputText, outputText, ol, cl);
-
   return response.data.choices[0].text;
 };
 
