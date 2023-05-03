@@ -13,6 +13,11 @@ const converterSchema = new Schema({
     ref: 'User',
   },
 
+  title: {
+    type: String,
+    default: true,
+  },
+
   originalCode: {
     type: String,
     required: true,

@@ -18,4 +18,20 @@ const getPrompts = catchAsync(async (req, res) => {
   return res.status(200).json({ response });
 });
 
-module.exports = { getPrompts };
+const savePrompts = catchAsync(async (req, res) => {
+  const { title, inputText, outputText, ol, cl } = req.body;
+  const userMongoId = req.user;
+
+  await openaiService.savePrompts(
+    userMongoId,
+    title,
+    inputText,
+    outputText,
+    ol,
+    cl
+  );
+
+  return res.status(201).json({ message: 'Save Prompt Successfully' });
+});
+
+module.exports = { getPrompts, savePrompts };
