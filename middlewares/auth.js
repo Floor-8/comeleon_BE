@@ -13,7 +13,6 @@ const verifyToken = catchAsync(async (req, res, next) => {
   const decode = jwt.verify(token, SECRET_KEY);
 
   req.user = decode.id;
-  console.log(req.user);
 
   return next();
 });
