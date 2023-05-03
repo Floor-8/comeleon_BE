@@ -59,4 +59,22 @@ const getPrompts = async (userMongoId, inputText, isComment, ol, cl) => {
   return response.data.choices[0].text;
 };
 
-module.exports = { getPrompts };
+const savePrompts = async (
+  userMongoId,
+  title,
+  inputText,
+  outputText,
+  ol,
+  cl
+) => {
+  return await openaiDao.createConverter(
+    userMongoId,
+    title,
+    inputText,
+    outputText,
+    ol,
+    cl
+  );
+};
+
+module.exports = { getPrompts, savePrompts };
