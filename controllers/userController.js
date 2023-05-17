@@ -6,7 +6,9 @@ const login = catchAsync(async (req, res) => {
 
   const result = await userService.login(clientId, credential);
 
-  res.status(200).json({ accessToken: result });
+  res
+    .status(200)
+    .json({ accessToken: result[0], nickName: result[1], picture: result[2] });
 });
 
 const getUserChats = catchAsync(async (req, res) => {
