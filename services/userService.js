@@ -19,6 +19,8 @@ const login = async (clientId, credential) => {
   const id = payload.sub;
   const email = payload.email;
   const name = payload.name;
+  const nickName = payload.given_name;
+  const picture = payload.picture;
 
   const [userInfo] = await userDao.getUserInfo(id);
 
@@ -29,7 +31,9 @@ const login = async (clientId, credential) => {
     await userDao.login(id, email, name);
     const [userInfo] = await userDao.getUserInfo(id);
     const userMongoId = userInfo._id.toString();
-    return await createAccessToken(userMongoId);
+    const accessToken = await createAccessToken(userMongoId);
+
+    return [accessToken, nickName, picture];
   }
 };
 
